@@ -1,0 +1,21 @@
+stages:
+    - build
+    - deploy
+
+build:
+ stage: build
+ script:
+  - echo "Building"
+ artifacts:
+  paths:
+    - public
+
+deploy:
+  stage: deploy
+  image: 
+    name: amazon/aws-cli
+    entrypoint: [""]
+  script:
+    - aws --version
+    - aws s3 rm s3://$S3_BUCKET
+    - aws s3 cp index.html s3://$S3_BUCKET
